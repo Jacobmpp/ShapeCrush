@@ -44,30 +44,18 @@ var noMatchFound = true;
 var matchAcross = false;
 var matchDown = false;
 var matchFound = false;
-var s1 = new Image();
-s1.src = "s1.png";
-var s2 = new Image();
-s2.src = "s2.png";
-var s3 = new Image();
-s3.src = "s3.png";
-var s4 = new Image();
-s4.src = "s4.png";
-var s5 = new Image();
-s5.src = "s5.png";
-var s9 = new Image();
-s9.src = "s9.png";
-var d1 = new Audio();
-d1.src = "d1.wav";
-var d2 = new Audio();
-d2.src = "d2.wav";
-var d3 = new Audio();
-d3.src = "d3.wav";
-var error = new Audio();
-error.src = "error.wav";
+var s = {};
+for(var i = 0; i < 6; i++){
+    s[i] = new Image(); s[i].src = "s" + i + ".png";
+}
+var d1    = new Audio(); d1.src    =    "d1.wav";
+var d2    = new Audio(); d2.src    =    "d2.wav";
+var d3    = new Audio(); d3.src    =    "d3.wav";
+var error = new Audio(); error.src = "error.wav";
 var oldScore = 0;
 var checkForMatchSuccess = false;
 var thereWasAMatch = false;
-var bonus1 = false;
+var bonus = false;
 function mouseMoveHandler(e) {
 	pX = e.clientX - canvas.offsetLeft;
 	pY = e.clientY - canvas.offsetTop;
@@ -137,22 +125,22 @@ function randArray() {
 			ctx.font = "30px Times New Roman";
 			//ctx.fillText(grid[i][j].value, x, y);
 			if (grid[i][j].value == 1) {
-				ctx.drawImage(s1, x, y);
+				ctx.drawImage(s[0], x, y);
 			}
 			if (grid[i][j].value == 2) {
-				ctx.drawImage(s2, x, y);
+				ctx.drawImage(s[1], x, y);
 			}
 			if (grid[i][j].value == 3) {
-				ctx.drawImage(s3, x, y);
+				ctx.drawImage(s[2], x, y);
 			}
 			if (grid[i][j].value == 4) {
-				ctx.drawImage(s4, x, y);
+				ctx.drawImage(s[3], x, y);
 			}
 			if (grid[i][j].value == 5) {
-				ctx.drawImage(s5, x, y);
+				ctx.drawImage(s[4], x, y);
 			}
 			if (grid[i][j].value == 9) {
-				ctx.drawImage(s9, x, y);
+				ctx.drawImage(s[5], x, y);
 			}
 		}
 	}
@@ -298,9 +286,9 @@ function collision() {
 								}
 							}
 						}
-						else if(matchFound && bonus1)
+						else if(matchFound && bonus)
 						{
-							console.log("else if matchFound and bonus1");
+							console.log("else if matchFound and bonus");
 							if(grid[selected1Row][selected1Col].value == 0)
 							{
 								grid[selected1Row][selected1Col].value = 9;
@@ -352,8 +340,8 @@ function checkForMatches() {
 					matchDown = true;
 					thereWasAMatch = true;
 					matchFound = true;
-					bonus1 = true;
-					console.log("There was a L match, bonus1 set to true");
+					bonus = true;
+					console.log("There was a L match, bonus set to true");
 					if(timeX<460-50)
 					{
 						timeX+=50;
@@ -380,8 +368,8 @@ function checkForMatches() {
 					matchDown = true;
 					thereWasAMatch = true;
 					matchFound = true;
-					bonus1 = true;
-					console.log("There was a L match, bonus1 set to true");
+					bonus = true;
+					console.log("There was a L match, bonus set to true");
 					if(timeX<460-50)
 					{
 						timeX+=50;
@@ -408,8 +396,8 @@ function checkForMatches() {
 					matchDown = true;
 					thereWasAMatch = true;
 					matchFound = true;
-					bonus1 = true;
-					console.log("There was a L match, bonus1 set to true");
+					bonus = true;
+					console.log("There was a L match, bonus set to true");
 					if(timeX<460-50)
 					{
 						timeX+=50;
@@ -436,8 +424,8 @@ function checkForMatches() {
 					matchDown = true;
 					thereWasAMatch = true;
 					matchFound = true;
-					bonus1 = true;
-					console.log("There was a L match, bonus1 set to true");
+					bonus = true;
+					console.log("There was a L match, bonus set to true");
 					if(timeX<460-50)
 					{
 						timeX+=50;
@@ -464,8 +452,8 @@ function checkForMatches() {
 					matchDown = true;
 					thereWasAMatch = true;
 					matchFound = true;
-					bonus1 = true;
-					console.log("There was a L match, bonus1 set to true");
+					bonus = true;
+					console.log("There was a L match, bonus set to true");
 					if(timeX<460-50)
 					{
 						timeX+=50;
@@ -492,8 +480,8 @@ function checkForMatches() {
 					matchDown = true;
 					thereWasAMatch = true;
 					matchFound = true;
-					bonus1 = true;
-					console.log("There was a L match, bonus1 set to true");
+					bonus = true;
+					console.log("There was a L match, bonus set to true");
 					if(timeX<460-50)
 					{
 						timeX+=50;
@@ -528,8 +516,8 @@ function checkForMatches() {
 					matchDown = true;
 					thereWasAMatch = true;
 					matchFound = true;
-					bonus1 = true;
-					console.log("There was a match of 5, bonus1 set to true");
+					bonus = true;
+					console.log("There was a match of 5, bonus set to true");
 					if(timeX<460-50)
 					{
 						timeX+=50;
@@ -564,8 +552,8 @@ function checkForMatches() {
 					matchAcross = true;
 					thereWasAMatch = true;
 					matchFound = true;
-					bonus1 = true;
-					console.log("There was a match of 5, bonus1 set to true");
+					bonus = true;
+					console.log("There was a match of 5, bonus set to true");
 					if(timeX<460-50)
 					{
 						timeX+=50;
@@ -773,19 +761,19 @@ function drawFallingCols() {
 				ctx.font = "30px Times New Roman";
 				//ctx.fillText(fallingCols[i].nums[j], x, y);
 				if (fallingCols[i].nums[j] == 1) {
-					ctx.drawImage(s1, x, y);
+					ctx.drawImage(s[0], x, y);
 				}
 				if (fallingCols[i].nums[j] == 2) {
-					ctx.drawImage(s2, x, y);
+					ctx.drawImage(s[1], x, y);
 				}
 				if (fallingCols[i].nums[j] == 3) {
-					ctx.drawImage(s3, x, y);
+					ctx.drawImage(s[2], x, y);
 				}
 				if (fallingCols[i].nums[j] == 4) {
-					ctx.drawImage(s4, x, y);
+					ctx.drawImage(s[3], x, y);
 				}
 				if (fallingCols[i].nums[j] == 5) {
-					ctx.drawImage(s5, x, y);
+					ctx.drawImage(s[4], x, y);
 				}
 			}
 		}
@@ -999,7 +987,7 @@ console.log("The size of falling cols is: " + fallingCols.length);
 		checkingForZeroes();
 		drawFallingCols();
 	}
-	bonus1 = false;
+	bonus = false;
 }
 setInterval(draw, 10);
 </script>
